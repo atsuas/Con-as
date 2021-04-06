@@ -10,25 +10,26 @@ namespace Exercise4
     {
         static void Main(string[] args)
         {
-            var text = "Cozy lummox gives smart squid who asks for job pen";
-            Exercise1_1(text);
-            Console.WriteLine();
-            Exercise1_2(text);
-        }
-
-        static void Exercise1_1(string text)
-        {
-            var dict = new Dictionary<Char, int>();
-            foreach (var c in text)
+            var line = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
+            foreach (var pair in line.Split(';'))
             {
-                var uc = char.ToUpper(c);
-                if ('A' <= uc && uc <= 'Z')
-                {
-                    if (dict.ContainsKey(uc))
-                        dict[uc]++;
-                    else
-                        dict[uc] = 1;
-                }
+                var array = pair.Split('=');
+                Console.WriteLine("{0}:{1}", ToJapanese(array[0]), array[1]);
             }
         }
+
+        static string ToJapanese(string key)
+        {
+            switch (key)
+            {
+                case "Novelist":
+                    return "作家　";
+                case "BestWork":
+                    return "代表作";
+                case "Born":
+                    return "誕生年";
+            }
+            throw new ArgumentException("引数keyは、正しい値ではありません");
+        }
+    }
 }
